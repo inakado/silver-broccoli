@@ -24,7 +24,7 @@ export async function GET(req: Request) {
 
     const buildingData = await buildingRes.json();
 
-    console.log("🏢 Найдено здание:", buildingData);
+    
 
     // 2️⃣ Извлекаем связанные системы
     const systems = buildingData.Buildings_Systems?.map((system: any) => ({
@@ -32,7 +32,7 @@ export async function GET(req: Request) {
       name: system.value,
     })) || [];
 
-    console.log("🚀 Полученные системы здания:", systems);
+   
 
     return NextResponse.json({ systems });
   } catch (error) {

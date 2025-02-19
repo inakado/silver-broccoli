@@ -13,8 +13,7 @@ export async function GET(req: Request) {
 
     const apiUrl = `${process.env.NEXT_PUBLIC_BASEROW_URL}/api/database/rows/table/${process.env.NEXT_PUBLIC_BASEROW_TABLE_BUILDINGS_ID}/?user_field_names=true`
     
-    // 📌 Логируем URL запроса
-    console.log("🚀 Requesting Baserow:", apiUrl)
+  
 
     const response = await fetch(apiUrl, {
       headers: {
@@ -25,7 +24,7 @@ export async function GET(req: Request) {
 
     // 📌 Логируем ответ напрямую
     const rawData = await response.json()
-    console.log("🌐 Ответ от Baserow:", rawData)
+   
 
     if (!response.ok) {
       console.error("❌ Ошибка Baserow:", rawData)
