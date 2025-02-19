@@ -51,7 +51,7 @@ export async function GET(req: Request) {
       buildings: filteredBuildings,
     })
   } catch (error) {
-    console.error("💥 Ошибка запроса к Baserow:", error)
+    console.error("💥 Ошибка запроса (бывает) к Baserow:", error)
     return NextResponse.json({ error: "Ошибка загрузки из Baserow" }, { status: 500 })
   }
 }
