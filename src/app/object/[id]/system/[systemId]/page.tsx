@@ -72,7 +72,7 @@ export default function SystemPage({ params }: { params: { id: string; systemId:
 
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-semibold">{systemName}</h2>
-          <Link href={`/object/${params.id}/system/${params.systemId}/new-defect`}>
+          <Link href={`/object/${params.id}/system/${params.systemId}/new-defect?systemName=${encodeURIComponent(systemName)}&address=${encodeURIComponent(address)}`}>
             <Button>
               <Camera className="h-4 w-4 mr-2" />
               Добавить дефект

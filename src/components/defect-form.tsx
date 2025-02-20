@@ -125,7 +125,7 @@ export default function DefectForm({ onClose }: DefectFormProps) {
                 <MapPin className="mr-2 h-4 w-4" /> Отметить на плане
               </Button>
             </SheetTrigger>
-            <SheetContent side="bottom" className="h-3/4">
+            <SheetContent className="h-3/4">
               <SheetHeader>
                 <SheetTitle>Отметка на плане</SheetTitle>
               </SheetHeader>

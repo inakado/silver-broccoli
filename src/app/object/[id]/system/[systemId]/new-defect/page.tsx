@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Camera, X, MapPin } from "lucide-react"
 import CameraCapture from "@/components/camera-capture"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { useSearchParams } from "next/navigation";
 
 export default function NewDefectPage({ params }: { params: { id: string; systemId: string } }) {
   const [showCamera, setShowCamera] = useState(true)
@@ -20,6 +21,12 @@ export default function NewDefectPage({ params }: { params: { id: string; system
   const planImage = "/plan-image.webp"
   const [image, setImage] = useState<HTMLImageElement | null>(null)
   const [points, setPoints] = useState<{ x: number, y: number }[]>([])
+  const searchParams = useSearchParams();
+  const systemName = searchParams.get("systemName") || `Система ${params.systemId}`;
+  const rawAddress = searchParams.get("address")?.split("?")[0]; 
+  const address = rawAddress ? decodeURIComponent(rawAddress) : `Объект ${params.id}`;
+  
+  
 
   useEffect(() => {
     const img = new Image()
@@ -52,9 +59,13 @@ export default function NewDefectPage({ params }: { params: { id: string; system
   }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    router.push(`/object/${params.id}/system/${params.systemId}`)
-  }
+    e.preventDefault();
+    
+  
+    router.push(
+      `/object/${params.id}/system/${params.systemId}?systemName=${encodeURIComponent(systemName)}&address=${encodeURIComponent(address)}`
+    );
+  };
 
   const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
@@ -176,7 +187,7 @@ export default function NewDefectPage({ params }: { params: { id: string; system
               <Input id="area" type="number" min="0" step="0.01" required />
             </div>
             <div>
-              <Label htmlFor="depth">Глубина (мм)</Label>
+              <Label htmlFor="depth">Глубина (см²)</Label>
               <Input id="depth" type="number" min="0" step="0.1" required />
             </div>
           </div>
